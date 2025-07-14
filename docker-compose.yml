@@ -1,0 +1,34 @@
+﻿services:
+    db: 
+        image: mariadb:latest
+        container_name: db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: notenmanager
+            MYSQL_USER: DBUser 
+            MYSQL_PASSWORD: Espas8049
+        ports:
+            - "3308:3306"
+        volumes:
+            - mariadb_data:/var/lib/mysql
+        networks:  
+            - notenmanger_network
+
+    db_UI:
+        image: phpmyadmin:latest
+        container_name: db_UI
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: root 
+        ports: 
+            - "8088:80"
+        depends_on:
+            - db
+        networks: 
+            - notenmanger_network 
+volumes: 
+    mariadb_data:
+networks:
+    notenmanger_network:
+      
