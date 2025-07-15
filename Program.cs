@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddScoped<NotenManagerRepository>(ServiceProvider =>
+    new NotenManagerRepository(builder.Configuration.GetConnectionString("DefaultConnection")));
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
