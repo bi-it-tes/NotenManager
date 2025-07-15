@@ -1,4 +1,5 @@
 using NotenManager.Components;
+using NotenManager.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<NotenManagerRepository>(ServiceProvider =>
-    new NotenManagerRepository(builder.Configuration.GetConnectionString("DefaultConnection")));
-);
+builder.Services.AddScoped<SemesterRepository>(ServiceProvider =>  // SemesterRepository 
+    new SemesterRepository(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );
+
+builder.Services.AddScoped<SubjectRepository>(ServiceProvider =>  //SubjectRepository
+    new SubjectRepository(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );
+
+builder.Services.AddScoped<GradeRepository>(ServiceProvider => //GradeRepository
+    new GradeRepository(builder.Configuration.GetConnectionString("DefaultConnection"))
+    );
 
 var app = builder.Build();
 

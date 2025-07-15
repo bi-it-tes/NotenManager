@@ -1,0 +1,26 @@
+﻿@page "/test"
+
+<button @onclick="TestDbConnection">Teste DB-Verbindung</button>
+
+<p>@message</p>
+<p>Testing</p>
+
+@code {
+    private string message = "";
+
+    private async Task TestDbConnection()
+    {
+        string connectionString = "Server=localhost;Database=deineDatenbank;User=root;Password=deinPasswort;";
+
+        try
+        {
+            using var db = new MySqlConnector.MySqlConnection(connectionString);
+            await db.OpenAsync();
+            message = "Verbindung erfolgreich!";
+        }
+        catch (Exception ex)
+        {
+            message = "Fehler: " + ex.Message;
+        }
+    }
+}
