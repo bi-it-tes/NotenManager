@@ -19,17 +19,17 @@ namespace NotenManager.Repository
 
 
         // read Methode to Get all Semesters
-        public IEnumerable<Semester> GetAll()
+        public IEnumerable<SemesterModel> GetAll()
         {
             using (var db = dbConnection)
             {
                 db.Open();
-                var result = db.Query<Semester>("SELECT * FROM Semester");
+                var result = db.Query<SemesterModel>("SELECT * FROM Semester");
                 return result;
             }
         }
         // Create a Semester
-        public void Create(Semester semester)
+        public void Create(SemesterModel semester)
         {
             using (var db = dbConnection)
             {

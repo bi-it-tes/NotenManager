@@ -1,10 +1,10 @@
 ﻿namespace NotenManager.Model
 {
-    public class Semester
+    public class SemesterModel
     {
         public int Id { get; set; }
         public int SemesterNumber { get; set; }
         // Navigation property: A Semester has many Subjects
-        public List<Subject> Subjects { get; set; } = new();
+        public List<SubjectModel> Subjects { get; set; } = new();
     }
 }

@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            string connectionString = "Server=localhost;Database=notenmanager;User=DBUser;Password=Espas8049;port=3308;AllowUserVariables=True;";
+            string connectionString = "Server=localhost;Port=3308;Database=notenmanager;User=DBUser;Password=Espas8049;AllowUserVariables=True;";
 
             try
             {

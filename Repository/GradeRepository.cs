@@ -17,17 +17,17 @@ namespace NotenManager.Repository
         }
 
         // read Methode to Get all Grades
-        public IEnumerable<Grade> GetAll()
+        public IEnumerable<GradeModel> GetAll()
         {
             using (var db = dbConnection)
             {
                 db.Open();
-                var result = db.Query<Grade>("SELECT * FROM Grade");
+                var result = db.Query<GradeModel>("SELECT * FROM Grade");
                 return result;
             }
         }
         // Create a Subject
-        public void Create(Grade grade)
+        public void Create(GradeModel grade)
         {
             using (var db = dbConnection)
             {

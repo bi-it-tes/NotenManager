@@ -1,0 +1,45 @@
+﻿@page "/"
+@inject SemesterRepository SemesterRepo
+@inject NavigationManager Navigation
+@using NotenManager.Model
+@using NotenManager.Repository
+
+<PageTitle>Semester</PageTitle>
+
+<h1>Willkommen zum deinem Moten Manger</h1>
+
+<div class="wrapper">
+    <h3>Welches Semesters:</h3>
+
+    <div class="SemesterForm">
+        @*Create Methode-----------------------------*@
+        @*GetALl Methode ----------Show_List---------*@
+        @foreach (var semesterItem in semesterListe)
+        {
+            <button onclick="() =>NavToSub(semesterItem.Id)"> 
+                @semesterItem.SemesterNumber
+            </button>
+        }
+
+
+    </div>
+</div>
+
+
+@code {
+    //GetAll ------------------------------------------
+    private List<SemesterModel> semesterListe = new();
+    protected override void OnInitialized()
+    {
+        semesterListe =  SemesterRepo.GetAll().ToList();
+    }
+
+    //Button function----------------------------------
+    private void NavToSub(int Id)
+    {
+        Navigation.NavigateTo($"/subject/{Id}");
+    }
+}
+
+
+

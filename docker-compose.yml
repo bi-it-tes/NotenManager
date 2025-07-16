@@ -31,4 +31,5 @@ volumes:
     mariadb_data:
 networks:
     notenmanger_network:
+        driver: bridge
       

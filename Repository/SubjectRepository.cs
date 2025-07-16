@@ -18,17 +18,17 @@ namespace NotenManager.Repository
         }
 
         // read Methode to Get all Subjects
-        public IEnumerable<Subject> GetAll()
+        public IEnumerable<SubjectModel> GetAll()
         {
             using (var db = dbConnection)
             {
                 db.Open();
-                var result = db.Query<Subject>("SELECT * FROM Subject");
+                var result = db.Query<SubjectModel>("SELECT * FROM Subject");
                 return result;
             }
         }
         // Create a Subject
-        public void Create(Subject subject)
+        public void Create(SubjectModel subject)
         {
             using (var db = dbConnection)
             {

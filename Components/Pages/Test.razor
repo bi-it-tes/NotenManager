@@ -10,7 +10,7 @@
 
     private async Task TestDbConnection()
     {
-        string connectionString = "Server=localhost;Database=deineDatenbank;User=root;Password=deinPasswort;";
+        string connectionString = "Server=localhost;Port=3308;Database=notenmanager;User=DBUser;Password=Espas8049;AllowUserVariables=True;";
 
         try
         {
@@ -22,5 +22,8 @@
         {
             message = "Fehler: " + ex.Message;
         }
+
+        // UI updaten
+        StateHasChanged();
     }
 }
