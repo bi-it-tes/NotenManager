@@ -1,8 +1,9 @@
-﻿using NotenManager.Model;
+﻿using Dapper;
+using MySqlConnector;
+using NotenManager.Components.Pages;
+using NotenManager.Model;
 using System.Data;
 using System.Data.Common;
-using MySqlConnector;
-using Dapper;
 
 namespace NotenManager.Repository
 {
@@ -18,12 +19,12 @@ namespace NotenManager.Repository
         }
 
         // read Methode to Get all Subjects
-        public IEnumerable<SubjectModel> GetAll()
+        public IEnumerable<SubjectModel> GetBySemester(int SemesterId)
         {
             using (var db = dbConnection)
             {
                 db.Open();
-                var result = db.Query<SubjectModel>("SELECT * FROM Subject");
+                var result = db.Query<SubjectModel>("SELECT * FROM Subject WHERE SemesterId = @SemesterId", new { SemesterId });
                 return result;
             }
         }

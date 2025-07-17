@@ -1,7 +1,8 @@
-﻿using NotenManager.Model;
-using System.Data;
+﻿using Dapper;
 using MySqlConnector;
-using Dapper;
+using NotenManager.Components.Pages;
+using NotenManager.Model;
+using System.Data;
 
 namespace NotenManager.Repository
 {
@@ -17,12 +18,12 @@ namespace NotenManager.Repository
         }
 
         // read Methode to Get all Grades
-        public IEnumerable<GradeModel> GetAll()
+        public IEnumerable<GradeModel> GetBySubject(int SubjectId)
         {
             using (var db = dbConnection)
             {
                 db.Open();
-                var result = db.Query<GradeModel>("SELECT * FROM Grade");
+                var result = db.Query<GradeModel>("SELECT * FROM Grade WHERE SubjectId = @SubjectId", new { SubjectId });
                 return result;
             }
         }
@@ -32,7 +33,7 @@ namespace NotenManager.Repository
             using (var db = dbConnection)
             {
                 db.Open();
-                await db.ExecuteAsync("INSERT INTO Grade (Name, Weighting, MaxPoints, AchivedPoints, Date, Comment) VALUES (@Name, @Weighting, @MaxPoints, @AchivedPoints, @Date, @Comment)", grade);
+                await db.ExecuteAsync("INSERT INTO Grade (SubjectId, Weighting, MaxPoints, AchivedPoints, Date, Comment) VALUES (@SubjectId, @Weighting, @MaxPoints, @AchivedPoints, @Date, @Comment)", grade);
             }
         }
         // Update the Subject Name  
