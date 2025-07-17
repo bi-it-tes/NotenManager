@@ -29,13 +29,11 @@ namespace NotenManager.Repository
             }
         }
         // Create a Semester
-        public void Create(SemesterModel semester)
+        public async Task Create(SemesterModel semester)
         {
-            using (var db = dbConnection)
-            {
-                db.Open(); 
-                db.Execute("INSERT INTO Semester (SemesterNumber) VALUES (@SemesterNumber)", semester);
-            }
+            using var db = dbConnection;
+            db.Open();
+            await db.ExecuteAsync("INSERT INTO Semester (SemesterNumber) VALUES (@SemesterNumber)", semester);
         }
         // Update the Semester number 
         public void Update(int Id, int SemesterNumber)
