@@ -32,7 +32,7 @@ namespace NotenManager.Repository
         {
             using var db = dbConnection;
             db.Open();
-            await db.ExecuteAsync("INSERT INTO Subject (Name) VALUES (@Name)", subject);
+            await db.ExecuteAsync("INSERT INTO Subject (Name, SemesterId) VALUES (@Name, @SemesterId)", subject);
             
         }
         // Update the Subject Name  
