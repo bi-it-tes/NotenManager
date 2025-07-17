@@ -1,5 +1,84 @@
-﻿<h3>Subject</h3>
+﻿@page "/subject/{SemesterId:int}"
+@inject SubjectRepository SubjectRepo
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+@using NotenManager.Model
+@using NotenManager.Repository
+@using Microsoft.AspNetCore.Components 
+
+<PageTitle>Subject</PageTitle>
+
+<h1>Deine Fächer:</h1>
+
+<div class="wrapper">
+
+    <div class="SubjectForm">
+        @*Create Methode-----------------------------*@
+        <input type="text" @bind="newSubjectItem" placeholder="Fachname" />
+        <button @onclick="CreateSubject">Add</button>
+
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <p>@errorMessage</p>
+        }
+
+        @*GetAll-----------------------------------------*@
+        @foreach (var subjectItem in subjectListe)
+        {
+            <button @onclick="() => NavToGrade(subjectItem.Id)">
+                @subjectItem.Name
+            </button>
+            <button @onclick="() => DeleteSubject(subjectItem.Id)">Delete</button>
+        }
+    </div>
+</div>
+
 
 @code {
+    // Getall------------------------------------------
+    private List<SubjectModel> subjectListe = new();
+    protected override void OnInitialized()
+    {
+        subjectListe = SubjectRepo.GetAll().ToList();
+    }
 
+    //Create ------------------------------------------
+    [Parameter]
+    public int SemesterId { get; set; }
+
+    string? newSubjectItem;
+    string? errorMessage;
+
+
+    private async Task CreateSubject()
+    {
+        if (string.IsNullOrWhiteSpace(newSubjectItem))
+        {
+            errorMessage = "Bitte gebe den Namen des Faches ein.";
+            return;
+        }
+
+        errorMessage = "";
+        var subject = new SubjectModel
+        {
+            Name = newSubjectItem,
+            SemesterId = SemesterId
+        };
+
+        await SubjectRepo.Create(subject);
+        subjectListe = SubjectRepo.GetAll().ToList();
+        newSubjectItem = string.Empty;
+    }
+    // Navigation to Grades ------------------------
+    private void NavToGrade(int Id)
+    {
+        Navigation.NavigateTo($"/grade/{Id}");
+    }
+
+    //Delete------------------------------------
+    private void DeleteSubject(int Id)
+    {
+        SubjectRepo.Delete(Id);
+        subjectListe = SubjectRepo.GetAll().ToList();
+    }
 }

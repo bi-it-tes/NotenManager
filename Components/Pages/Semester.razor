@@ -17,7 +17,7 @@
         <input type="text" @bind="newSemesterItem" placeholder="Which Semester startet..." />
         <button type="submit" onclick="@CreateSemester">Add</button>
 
-        @if (!string.IsNullOrEmpty(errorMessage))
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
         {
             <p>@errorMessage</p>
         }
@@ -62,7 +62,7 @@
         semesterListe =  SemesterRepo.GetAll().ToList();
     }
 
-    //Navigation to Subject function----------------------------------
+    //Navigation to Subject----------------------------------
     private void NavToSub(int Id)
     {
         Navigation.NavigateTo($"/subject/{Id}");
