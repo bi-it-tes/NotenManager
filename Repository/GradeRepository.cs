@@ -27,12 +27,12 @@ namespace NotenManager.Repository
             }
         }
         // Create a Subject
-        public void Create(GradeModel grade)
+        public async Task Create(GradeModel grade)
         {
             using (var db = dbConnection)
             {
                 db.Open();
-                db.Execute("INSERT INTO Grade (Name, Weighting, MaxPoints, AchivedPoints, Date, Comment) VALUES (@Name, @Weighting, @MaxPoints, @AchivedPoints, @Date, @Comment)", grade);
+                await db.ExecuteAsync("INSERT INTO Grade (Name, Weighting, MaxPoints, AchivedPoints, Date, Comment) VALUES (@Name, @Weighting, @MaxPoints, @AchivedPoints, @Date, @Comment)", grade);
             }
         }
         // Update the Subject Name  

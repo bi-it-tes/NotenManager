@@ -1,0 +1,75 @@
+﻿@page "/grade/{SubjectId:int}"
+@inject SubjectRepository GradeRepo
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+@using NotenManager.Model
+@using NotenManager.Repository
+@using Microsoft.AspNetCore.Components
+
+<PageTitle>Subject</PageTitle>
+
+<h1>Deine Noten:</h1>
+
+<div class="wrapper">
+
+    <div class="PageForm">
+        @*Create Methode-----------------------------*@
+        <input type="text" @bind="newSubjectItem" placeholder="Fachname" />
+        <button @onclick="CreateSubject">Add</button>
+
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <p>@errorMessage</p>
+        }
+
+        @*GetAll-----------------------------------------*@
+        @foreach (var gradItem in gradeListe)
+        {
+
+            <p>@gradeItem.Name</p>
+            <button @onclick="() => DeleteSubject(gradeItem.Id)">Delete</button>
+        }
+    </div>
+</div>
+
+
+@code {
+    // Getall------------------------------------------
+    private List<GradeModel> gradeList = new();
+    protected override void OnInitialized()
+    {
+        gradeList = GradeRepo.GetAll().ToList();
+    }
+
+    //Create ------------------------------------------
+    string? newGradeItem;
+    string? errorMessage;
+
+
+    private async Task CreateGrade()
+    {
+        if (string.IsNullOrWhiteSpace(newGradeItem))
+        {
+            errorMessage = "Bitte gebe den Namen des Faches ein.";
+            return;
+        }
+
+        errorMessage = "";
+        var subject = new SubjectModel
+        {
+            Name = newSubjectItem,
+            SemesterId = SemesterId
+        };
+
+        await SubjectRepo.Create(subject);
+        subjectListe = SubjectRepo.GetAll().ToList();
+        newSubjectItem = string.Empty;
+    }
+  
+    //Delete------------------------------------
+    private void DeleteSubject(int Id)
+    {
+        GradeRepo.Delete(Id);
+        gradeList = GradeRepo.GetAll().ToList();
+    }
+}
