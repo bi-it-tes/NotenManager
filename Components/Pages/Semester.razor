@@ -1,32 +1,58 @@
 ﻿@page "/"
 @inject SemesterRepository SemesterRepo
 @inject NavigationManager Navigation
+@rendermode InteractiveServer
 @using NotenManager.Model
 @using NotenManager.Repository
 
 <PageTitle>Semester</PageTitle>
 
-<h1>Willkommen zum deinem Moten Manger</h1>
+<h1>Willkommen zum deinem Noten Manger</h1>
 
 <div class="wrapper">
     <h3>Welches Semesters:</h3>
 
     <div class="SemesterForm">
         @*Create Methode-----------------------------*@
+        <input type="text" @bind="newSemesterItem" placeholder="Which Semester startet..." />
+        <button type="submit" onclick="@CreateSemester">Add</button>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <p>@errorMessage</p>
+        }
+
         @*GetALl Methode ----------Show_List---------*@
         @foreach (var semesterItem in semesterListe)
         {
-            <button onclick="() =>NavToSub(semesterItem.Id)"> 
+            <button @onclick="() => NavToSub(semesterItem.Id)"> 
                 @semesterItem.SemesterNumber
             </button>
         }
-
-
     </div>
 </div>
 
 
 @code {
+    //Create ------------------------------------------
+    string? newSemesterItem;
+    string errorMessage  =string.Empty;
+    private async Task CreateSemester()
+    {
+
+        if (string.IsNullOrWhiteSpace(newSemesterItem) || !int.TryParse(newSemesterItem, out int semesterNumber))
+        {
+            errorMessage = "Bitte eine gültige Zahl eingeben";
+            return;
+        }
+
+        errorMessage = ""; // zurücksetzten von Errorhandling
+        var semester = new SemesterModel { SemesterNumber = semesterNumber };
+        await SemesterRepo.Create(semester);
+        semesterListe = SemesterRepo.GetAll().ToList();  // Liste Aktualisiern
+        newSemesterItem = ""; // Eingabe leeren
+    }
+
     //GetAll ------------------------------------------
     private List<SemesterModel> semesterListe = new();
     protected override void OnInitialized()
@@ -40,6 +66,3 @@
         Navigation.NavigateTo($"/subject/{Id}");
     }
 }
-
-
-

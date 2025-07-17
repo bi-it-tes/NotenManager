@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotenManager", "NotenManager.csproj", "{434B6A79-1027-4B27-8C95-EDA82B0BDBA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NotenManager.Test", "..\NotenManager.Test\NotenManager.Test.csproj", "{238B5758-AF32-49DD-A39C-489E5BAD4C8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{434B6A79-1027-4B27-8C95-EDA82B0BDBA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{434B6A79-1027-4B27-8C95-EDA82B0BDBA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{434B6A79-1027-4B27-8C95-EDA82B0BDBA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238B5758-AF32-49DD-A39C-489E5BAD4C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238B5758-AF32-49DD-A39C-489E5BAD4C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238B5758-AF32-49DD-A39C-489E5BAD4C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238B5758-AF32-49DD-A39C-489E5BAD4C8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
