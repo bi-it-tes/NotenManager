@@ -14,7 +14,7 @@
 
     <div class="SemesterForm">
         @*Create Methode-----------------------------*@
-        <input type="text" @bind="newSemesterItem" placeholder="Which Semester startet..." />
+        <input type="text" @bind="newSemesterItem" placeholder="Welches Semester ist es..." />
         <button type="submit" onclick="@CreateSemester">Add</button>
 
         @if (!string.IsNullOrWhiteSpace(errorMessage))

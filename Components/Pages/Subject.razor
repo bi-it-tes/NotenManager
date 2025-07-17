@@ -39,7 +39,7 @@
     private List<SubjectModel> subjectListe = new();
     protected override void OnInitialized()
     {
-        subjectListe = SubjectRepo.GetAll().ToList();
+        subjectListe = SubjectRepo.GetBySemester(SemesterId).ToList();
     }
 
     //Create ------------------------------------------
@@ -66,7 +66,7 @@
         };
 
         await SubjectRepo.Create(subject);
-        subjectListe = SubjectRepo.GetAll().ToList();
+        subjectListe = SubjectRepo.GetBySemester(SemesterId).ToList();
         newSubjectItem = string.Empty;
     }
     // Navigation to Grades ------------------------
@@ -79,6 +79,6 @@
     private void DeleteSubject(int Id)
     {
         SubjectRepo.Delete(Id);
-        subjectListe = SubjectRepo.GetAll().ToList();
+        subjectListe = SubjectRepo.GetBySemester(SemesterId).ToList();
     }
 }
