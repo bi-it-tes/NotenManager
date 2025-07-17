@@ -1,0 +1,108 @@
+﻿@page "/grade/{SubjectId:int}"
+@inject GradeRepository GradeRepo
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+@using NotenManager.Model
+@using NotenManager.Repository
+@using Microsoft.AspNetCore.Components
+
+<PageTitle>Subject</PageTitle>
+
+<h1>Deine Noten:</h1>
+
+<div class="wrapper">
+
+    <div class="GradeForm">
+        @*Create Methode-----------------------------*@
+        <label>Datum:</label>
+        <input type="date" @bind="newGrade.Date" />
+
+        <label>Maximal Punkte:</label>
+        <input type="number" @bind="newGrade.MaxPoints" />
+
+        <label>Erreichte Punkte:</label>
+        <input type="number" @bind="newGrade.AchivedPoints" />
+        
+        <label>Gewichtung:</label>
+        <input type="number" @bind="newGrade.Weighting" />
+        
+        <label>Komentare:</label>
+        <input type="text" @bind="newGrade.Comment" />
+
+        <button @onclick="CreateGrade">Note Speichern</button>
+        @if (!string.IsNullOrWhiteSpace(errorMessage))
+        {
+            <p>@errorMessage</p>
+        }
+
+        @*GetAll-----------------------------------------*@
+        @foreach (var gradeItem in gradeList)
+        {
+            <p>Note am @gradeItem.Date.ToShortDateString():
+            @gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte
+            (Gewichtung: @gradeItem.Weighting)
+            </p>
+
+            <button @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
+        }
+    </div>
+</div>
+
+
+@code {
+    // Getall------------------------------------------
+    [Parameter]
+    public int SubjectId { get; set; }
+
+    private List<GradeModel> gradeList = new();
+    protected override void OnParametersSet()
+    {
+        gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+    }
+
+    //Create ------------------------------------------
+    string? errorMessage;
+    string? newGrad;
+
+    GradeModel newGrade = new();
+
+    private async Task CreateGrade()
+    {
+        if (newGrade.MaxPoints <= 0)
+        {
+            errorMessage = "Maximalpunkte muss grösser sein als 0.";
+            return;
+        }
+
+        if (newGrade.AchivedPoints < 0)
+        {
+            errorMessage = "ErreichtePunkte muss grösser sein als 0.";
+            return;
+        }
+
+        if (newGrade.AchivedPoints > newGrade.MaxPoints)
+        {
+            errorMessage = "Erreichte Punkte dürfen nicht größer als Maximalpunkte sein.";
+            return;
+        }
+
+        if (newGrade.AchivedPoints > newGrade.MaxPoints)
+        {
+            errorMessage = "Erreichte Punkte dürfen nicht größer als Maximalpunkte sein.";
+            return;
+        }
+        
+
+        newGrade.SubjectId = SubjectId; // Verbindung zum Fach setzen
+        await GradeRepo.Create(newGrade); 
+        gradeList = GradeRepo.GetBySubject(SubjectId).ToList(); 
+        newGrade = new(); // Formular leeren
+    }
+  
+    //Delete------------------------------------
+    private void DeleteGrade(int Id)
+    {
+        GradeRepo.Delete(Id);
+        gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+    }
+}

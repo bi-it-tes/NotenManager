@@ -9,7 +9,6 @@
         public DateTime Date { get; set; }
         public string? Comment { get; set; } 
         public int SubjectId { get; set; }
-        public SubjectModel Subject { get; set; } // Navigation property: Grades belongs to a Subject
 
     }
 }
