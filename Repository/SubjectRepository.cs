@@ -28,13 +28,12 @@ namespace NotenManager.Repository
             }
         }
         // Create a Subject
-        public void Create(SubjectModel subject)
+        public async Task Create(SubjectModel subject)
         {
-            using (var db = dbConnection)
-            {
-                db.Open();
-                db.Execute("INSERT INTO Subject (Name) VALUES (@Name)", subject);
-            }
+            using var db = dbConnection;
+            db.Open();
+            await db.ExecuteAsync("INSERT INTO Subject (Name) VALUES (@Name)", subject);
+            
         }
         // Update the Subject Name  
         public void Update(int Id, string Name)
