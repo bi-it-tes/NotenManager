@@ -32,10 +32,11 @@ namespace NotenManager.Repository
         {
             using (var db = dbConnection)
             {
-                db.Open();
-                await db.ExecuteAsync("INSERT INTO Grade (SubjectId, Weighting, MaxPoints, AchivedPoints, Date, Comment) VALUES (@SubjectId, @Weighting, @MaxPoints, @AchivedPoints, @Date, @Comment)", grade);
+                db.Open();  
+                await db.ExecuteAsync("INSERT INTO Grade (SubjectId, Weighting, MaxPoints, AchivedPoints, Grade, Date, Comment) VALUES (@SubjectId, @Weighting, @MaxPoints, @AchivedPoints, @Grade, @Date, @Comment)", grade);
             }
         }
+
         // Update the Subject Name  
         public void Update(int Id, double Weighting, int MaxPoints, int AchivedPoints, string Comment)
         {
