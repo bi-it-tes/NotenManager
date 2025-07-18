@@ -36,6 +36,30 @@ namespace NotenManager.Repository
                 await db.ExecuteAsync("INSERT INTO Grade (SubjectId, Weighting, MaxPoints, AchivedPoints, Grade, Date, Comment) VALUES (@SubjectId, @Weighting, @MaxPoints, @AchivedPoints, @Grade, @Date, @Comment)", grade);
             }
         }
+        // Calculation Function to calculate the Total grade of the Subject
+        public double? CalcTotalGrade(int subjectId)
+        {
+            var grades = GetBySubject(subjectId);
+
+            double weightedSum = 0;
+            double totalWeight = 0;
+
+            foreach (var grade in grades)
+            {
+                if (grade.Weighting > 0)
+                {
+                    weightedSum += grade.Grade * grade.Weighting;
+                    totalWeight += grade.Weighting;
+                }
+            }
+            
+            if (totalWeight == 0)
+                return null;
+
+            double totalGrade = weightedSum / totalWeight;
+            return totalGrade;
+           
+        }
 
         // Update the Subject Name  
         public void Update(int Id, double Weighting, int MaxPoints, int AchivedPoints, string Comment)

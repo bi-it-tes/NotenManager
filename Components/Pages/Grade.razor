@@ -48,6 +48,10 @@
 
             <button @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
         }
+
+        <p>Gesamtnote (@totalGrade): </p>
+
+
     </div>
 </div>
 
@@ -57,10 +61,13 @@
     [Parameter]
     public int SubjectId { get; set; }
 
+    private double? totalGrade;
+
     private List<GradeModel> gradeList = new();
     protected override void OnParametersSet()
     {
         gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+        totalGrade = GradeRepo.CalcTotalGrade(SubjectId);
     }
 
     //Create -----------with Grade Calculation-------------------------------
@@ -104,7 +111,8 @@
 
         newGrade.SubjectId = SubjectId; // Verbindung zum Fach setzen
         await GradeRepo.Create(newGrade); 
-        gradeList = GradeRepo.GetBySubject(SubjectId).ToList(); 
+        gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+        totalGrade = GradeRepo.CalcTotalGrade(SubjectId);
         newGrade = new(); // Formular leeren
     }
   

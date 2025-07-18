@@ -3,7 +3,7 @@
     public class GradeModel
     {
         public int Id { get; set; }
-        public double? Weighting { get; set; }  
+        public double Weighting { get; set; }  
         public int MaxPoints { get; set; }
         public int AchivedPoints { get; set; }
         public double Grade { get; set; }
