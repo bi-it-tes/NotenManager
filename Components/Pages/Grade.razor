@@ -38,13 +38,20 @@
         @*GetAll-----------------------------------------*@
         @foreach (var gradeItem in gradeList)
         {
-            <p>Note am @gradeItem.Date.ToShortDateString():
+            <p>Note am: @gradeItem.Date.ToShortDateString():
+                Punkte:
             @gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte
             (Gewichtung: @gradeItem.Weighting)
             </p>
 
+            <p>@gradeItem.Grade</p>
+
             <button @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
         }
+
+        <p>Gesamtnote (@totalGrade): </p>
+
+
     </div>
 </div>
 
@@ -54,18 +61,22 @@
     [Parameter]
     public int SubjectId { get; set; }
 
+    private double? totalGrade;
+
     private List<GradeModel> gradeList = new();
     protected override void OnParametersSet()
     {
         gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+        totalGrade = GradeRepo.CalcTotalGrade(SubjectId);
     }
 
-    //Create ------------------------------------------
+    //Create -----------with Grade Calculation-------------------------------
     string? errorMessage;
 
     GradeModel newGrade = new() { Weighting = 100 };
 
-    private async Task CreateGrade()
+
+    private async Task CreateGrade()   
     {
         if (newGrade.MaxPoints <= 0)
         {
@@ -91,11 +102,17 @@
             return;
         }
 
+        if (newGrade.MaxPoints > 0)
+        {
+            newGrade.Grade = (newGrade.AchivedPoints * 5.0) / newGrade.MaxPoints + 1;
+        }
+
         errorMessage = null; // Vorherige Fehlermeldung löschen, wenn alles okey ist. 
 
         newGrade.SubjectId = SubjectId; // Verbindung zum Fach setzen
         await GradeRepo.Create(newGrade); 
-        gradeList = GradeRepo.GetBySubject(SubjectId).ToList(); 
+        gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+        totalGrade = GradeRepo.CalcTotalGrade(SubjectId);
         newGrade = new(); // Formular leeren
     }
   
