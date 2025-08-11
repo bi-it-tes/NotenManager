@@ -6,7 +6,7 @@
 @using NotenManager.Repository
 @using Microsoft.AspNetCore.Components
 
-<PageTitle>Subject</PageTitle>
+<PageTitle>Grades</PageTitle>
 
 <h1>Deine Noten:</h1>
 
@@ -24,7 +24,7 @@
         <input type="number" @bind="newGrade.AchivedPoints" />
         
         <label>Gewichtung:</label>
-        <input type="number" @bind="newGrade.Weighting" />
+        <input type="number" @bind="newGrade.Weighting" placeholder="100%" />
         
         <label>Komentare:</label>
         <input type="text" @bind="newGrade.Comment" />
@@ -62,9 +62,8 @@
 
     //Create ------------------------------------------
     string? errorMessage;
-    string? newGrad;
 
-    GradeModel newGrade = new();
+    GradeModel newGrade = new() { Weighting = 100 };
 
     private async Task CreateGrade()
     {
@@ -86,12 +85,13 @@
             return;
         }
 
-        if (newGrade.AchivedPoints > newGrade.MaxPoints)
+        if (newGrade.Weighting <= 0)
         {
-            errorMessage = "Erreichte Punkte dürfen nicht größer als Maximalpunkte sein.";
+            errorMessage = "Gewichtung muss grösser als 0 sein.";
             return;
         }
-        
+
+        errorMessage = null; // Vorherige Fehlermeldung löschen, wenn alles okey ist. 
 
         newGrade.SubjectId = SubjectId; // Verbindung zum Fach setzen
         await GradeRepo.Create(newGrade); 
