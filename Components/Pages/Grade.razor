@@ -8,11 +8,11 @@
 
 <PageTitle>Grades</PageTitle>
 
-<h1>Deine Noten:</h1>
+<h1 class="container-fluid p-5 bg-primary text-white text-center">Deine Noten:</h1>
 
-<div class="wrapper">
+<div class="wrapper"> @*container p-5 my-5 border //Bootstrap*@
 
-    <div class="GradeForm">
+    <div class="container-fluid">
         @*Create Methode-----------------------------*@
         <label>Datum:</label>
         <input type="date" @bind="newGrade.Date" />

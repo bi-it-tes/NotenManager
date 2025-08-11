@@ -9,10 +9,10 @@
 
 <h1>Willkommen zum deinem Noten Manger</h1>
 
-<div class="wrapper">
-    <h3>Welches Semesters:</h3>
+<div class="wrapper"> @*container p-5 my-5 border //Bootstrap*@
+    <h3 class="container-fluid p-5 bg-primary text-white text-center">Welches Semesters:</h3>
 
-    <div class="SemesterForm">
+    <div class="container-fluid">
         @*Create Methode-----------------------------*@
         <input type="text" @bind="newSemesterItem" placeholder="Welches Semester ist es..." />
         <button type="submit" onclick="@CreateSemester">Add</button>

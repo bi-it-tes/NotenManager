@@ -8,11 +8,11 @@
 
 <PageTitle>Subject</PageTitle>
 
-<h1>Deine Fächer:</h1>
+<h1 class="container-fluid p-5 bg-primary text-white text-center">Deine Fächer:</h1>
 
-<div class="wrapper">
+<div class="wrapper"> @*container p-5 my-5 border //Bootstrap*@
 
-    <div class="SubjectForm">
+    <div class="container-fluid">
         @*Create Methode-----------------------------*@
         <input type="text" @bind="newSubjectItem" placeholder="Fachname" />
         <button @onclick="CreateSubject">Add</button>
