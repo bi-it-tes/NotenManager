@@ -10,46 +10,48 @@
 
 <h1 class="container-fluid p-5 bg-primary text-white text-center">Deine Noten:</h1>
 
-<div class="wrapper"> @*container p-5 my-5 border //Bootstrap*@
+<div class="m-3 p-3 border rounded border border-5">
 
     <div class="container-fluid">
         @*Create Methode-----------------------------*@
-        <label>Datum:</label>
-        <input type="date" @bind="newGrade.Date" />
+        <label for="date" class="form-label">Datum:</label>
+        <input type="date" class="form-control" id="date" @bind="newGrade.Date" />
 
-        <label>Maximal Punkte:</label>
-        <input type="number" @bind="newGrade.MaxPoints" />
+        <label for="maxPoints" class="form-label">Maximal Punkte:</label>
+        <input type="number" class="form-control" id="maxPoints" @bind="newGrade.MaxPoints" />
 
-        <label>Erreichte Punkte:</label>
-        <input type="number" @bind="newGrade.AchivedPoints" />
+        <label for="points" class="form-label">Erreichte Punkte:</label>
+        <input type="number" class="form-control" id="points" @bind="newGrade.AchivedPoints" />
         
-        <label>Gewichtung:</label>
-        <input type="number" @bind="newGrade.Weighting" placeholder="100%" />
+        <label for="weighting" class="form-label">Gewichtung:</label>
+        <input type="number" class="form-control" id="weighting" @bind="newGrade.Weighting" placeholder="100%" />
         
-        <label>Komentare:</label>
-        <input type="text" @bind="newGrade.Comment" />
+        <label for="comment" class="form-label">Komentare:</label>
+        <input type="text" class="form-control" id="comment" @bind="newGrade.Comment" />
 
-        <button class="btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
+        <button class="mt-4 mb-2 p-3 btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
         @if (!string.IsNullOrWhiteSpace(errorMessage))
         {
             <p>@errorMessage</p>
         }
 
         @*GetAll-----------------------------------------*@
-        @foreach (var gradeItem in gradeList)
-        {
+
+        <section>
+            @foreach (var gradeItem in gradeList)
+            {
             <p>Note am: @gradeItem.Date.ToShortDateString():
                 Punkte:
             @gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte
             (Gewichtung: @gradeItem.Weighting)
             </p>
-
-            <p>@gradeItem.Grade</p>
-
-            <button class="btn btn-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
+            @*Durchschnitts note von der liste*@
+                <p>@gradeItem.Grade</p>
+                <button class="btn btn-outline-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
         }
+        </section>
 
-        <p>Gesamtnote (@totalGrade): </p>
+        <p class="mt-4 mb-2 p-3 rounded bg-secondary">Gesamtnote (@totalGrade): </p>
 
 
     </div>

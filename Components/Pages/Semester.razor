@@ -8,15 +8,16 @@
 <PageTitle>Semester</PageTitle>
 
 <h1>Willkommen zum deinem Noten Manger</h1>
-
-<div class="wrapper"> @*container p-5 my-5 border //Bootstrap*@
+<section>
+<div class="m-3 p-3 border rounded border border-5">
     <h3 class="container-fluid p-5 bg-primary text-white text-center">
         Welches Semesters:
     </h3>
-
+</div>
     <div class="container-fluid">
         @*Create Methode-----------------------------*@
-        <input type="text" @bind="newSemesterItem" placeholder="Welches Semester ist es..." />
+        <label for="semester" class="form-label">Welches Semester:</label>
+        <input type="text" class="form-control" id="semester" @bind="newSemesterItem" placeholder="erster Semester" />
         <button class="btn btn-primary" type="submit" onclick="@CreateSemester">Add</button>
 
         @if (!string.IsNullOrWhiteSpace(errorMessage))
@@ -24,18 +25,18 @@
             <p>@errorMessage</p>
         }
 
+        <section>
         @*GetALl Methode ----------Show_List---------*@
-        @foreach (var semesterItem in semesterListe)
-        {
-            <button class="btn btn-secondary" @onclick="() => NavToSub(semesterItem.Id)"> 
-                @semesterItem.SemesterNumber
-            </button>
-            <button class="btn btn-danger" @onclick="() => DeleteSemester(semesterItem.Id)">Delete</button>
-        }
-
+            @foreach (var semesterItem in semesterListe)
+            {
+                <button class="btn btn-outline-secondary" @onclick="() => NavToSub(semesterItem.Id)">
+                    @semesterItem.SemesterNumber
+                </button>
+                <button class="btn btn-outline-danger" @onclick="() => DeleteSemester(semesterItem.Id)">Delete</button>
+            }
+        </section>
     </div>
-</div>
-
+</section>
 
 @code {
     //Create ------------------------------------------
