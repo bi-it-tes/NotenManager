@@ -14,7 +14,7 @@
      
     <div class="m-3 p-2 border rounded border border-5">
     <div class="container-fluid">
-        <section class="createSemester">
+        <section class="createSection">
             @*Create Methode-----------------------------*@
             <label for="semester" class="form-label">Welches Semester:</label>
             <input type="text" class="form-control" id="semester" @bind="newSemesterItem" placeholder="erster Semester" />
@@ -25,7 +25,7 @@
                 <p>@errorMessage</p>
             }
         </section>
-        <section class="semesterList">
+        <section class="itemList">
         @*GetALl Methode ----------Show_List---------*@
             @foreach (var semesterItem in semesterListe)
             { 

@@ -13,6 +13,7 @@
 <div class="m-3 p-3 border rounded border border-5">
 
     <div class="container-fluid">
+        <section class="createSection">
         @*Create Methode-----------------------------*@
         <label for="subject" class="form-label">Welches Fach:</label>
         <input type="text" class="form-control" id="subject" @bind="newSubjectItem" placeholder=" Modul..." />
@@ -22,9 +23,10 @@
         {
             <p>@errorMessage</p>
         }
+        </section>
 
         @*GetAll-----------------------------------------*@
-        <section>
+        <section class="itemList">
             @foreach (var subjectItem in subjectListe)
             {
                 <button class="btn btn-outline-secondary" @onclick="() => NavToGrade(subjectItem.Id)">
