@@ -1,42 +1,44 @@
-﻿@page "/"
+﻿@page "/semester"
 @inject SemesterRepository SemesterRepo
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
-@using NotenManager.Model
 @using NotenManager.Repository
+@using NotenManager.Model
 
 <PageTitle>Semester</PageTitle>
 
-<h1>Willkommen zum deinem Noten Manger</h1>
-<section>
-<div class="m-3 p-3 border rounded border border-5">
+
     <h3 class="container-fluid p-5 bg-primary text-white text-center">
         Welches Semesters:
     </h3>
-</div>
+     
+    <div class="m-3 p-2 border rounded border border-5">
     <div class="container-fluid">
-        @*Create Methode-----------------------------*@
-        <label for="semester" class="form-label">Welches Semester:</label>
-        <input type="text" class="form-control" id="semester" @bind="newSemesterItem" placeholder="erster Semester" />
-        <button class="btn btn-primary" type="submit" onclick="@CreateSemester">Add</button>
+        <section class="createSection">
+            @*Create Methode-----------------------------*@
+            <label for="semester" class="form-label">Welches Semester:</label>
+            <input type="text" class="form-control" id="semester" @bind="newSemesterItem" placeholder="erster Semester" />
+            <button class="btn btn-primary" type="submit" onclick="@CreateSemester">Add</button>
 
-        @if (!string.IsNullOrWhiteSpace(errorMessage))
-        {
-            <p>@errorMessage</p>
-        }
-
-        <section>
-        @*GetALl Methode ----------Show_List---------*@
-            @foreach (var semesterItem in semesterListe)
+            @if (!string.IsNullOrWhiteSpace(errorMessage))
             {
-                <button class="btn btn-outline-secondary" @onclick="() => NavToSub(semesterItem.Id)">
-                    @semesterItem.SemesterNumber
-                </button>
-                <button class="btn btn-outline-danger" @onclick="() => DeleteSemester(semesterItem.Id)">Delete</button>
+                <p>@errorMessage</p>
             }
         </section>
+        <section class="itemList">
+        @*GetALl Methode ----------Show_List---------*@
+            @foreach (var semesterItem in semesterListe)
+            { 
+                    <div class="d-flex gap-2 mb-2">
+                        <button class="btn btn-outline-secondary" @onclick="() => NavToSub(semesterItem.Id)">
+                            @semesterItem.SemesterNumber
+                        </button>
+                        <button class="btn btn-danger" @onclick="() => DeleteSemester(semesterItem.Id)">Delete</button>
+                    </div>
+            }
+        </section>
+        </div>
     </div>
-</section>
 
 @code {
     //Create ------------------------------------------

@@ -1,0 +1,11 @@
+﻿/* button style */
+.btn-outline-secondary {
+    color: green;
+    border-color: darkgreen;
+}
+
+    .btn-outline-secondary:hover {
+        color: black;
+        background-color: mediumseagreen;
+        border-color: #000000;
+    }

@@ -1,3 +1,17 @@
-* {
-    background-color: #ffffff;
+.container-fluid {
+    padding-bottom: 1rem;
+}
+
+section {
+    margin-top: 2em;
+}
+
+/* Input Form */
+.createSection input {
+    margin-bottom: 1em;
+}
+
+/* Navigation List */
+.itemList {
+    margin-top: 1rem;
 }
