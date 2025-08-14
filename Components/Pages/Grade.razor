@@ -29,7 +29,7 @@
         <label>Komentare:</label>
         <input type="text" @bind="newGrade.Comment" />
 
-        <button @onclick="CreateGrade">Note Speichern</button>
+        <button class="btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
         @if (!string.IsNullOrWhiteSpace(errorMessage))
         {
             <p>@errorMessage</p>
@@ -46,7 +46,7 @@
 
             <p>@gradeItem.Grade</p>
 
-            <button @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
+            <button class="btn btn-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
         }
 
         <p>Gesamtnote (@totalGrade): </p>
