@@ -15,3 +15,21 @@ section {
 .itemList {
     margin-top: 1rem;
 }
+
+h1.pageTitle {
+    /* entspricht container-fluid */
+    display: block;
+    width: 100%;
+    /* entspricht p-5 (Bootstrap = 3rem) */
+    padding: 3rem;
+    /* entspricht bg-primary */
+    background-color: var(--bs-primary);
+    /* entspricht text-white */
+    color: var(--bs-white);
+    /* entspricht text-center */
+    text-align: center;
+    /* extra Abstand nach unten */
+    margin-bottom: 1rem;
+}
+
+/*container-fluid p-5 bg-primary text-white text-center <-- h1 klasse*/
