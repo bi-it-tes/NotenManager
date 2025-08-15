@@ -16,7 +16,7 @@ section {
     margin-top: 1rem;
 }
 
-page-title {
+h1.pageTitle {
     /* entspricht container-fluid */
     display: block;
     width: 100%;
