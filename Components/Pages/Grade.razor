@@ -13,28 +13,29 @@
 <div class="m-3 p-3 border rounded border border-5">
 
     <div class="container-fluid">
+        <sectin>
         @*Create Methode-----------------------------*@
-        <label for="date" class="form-label">Datum:</label>
-        <input type="date" class="form-control" id="date" @bind="newGrade.Date" />
+            <label for="date" class="form-label">Datum:</label>
+            <input type="date" class="form-control" id="date" @bind="newGrade.Date" />
 
-        <label for="maxPoints" class="form-label">Maximal Punkte:</label>
-        <input type="number" class="form-control" id="maxPoints" @bind="newGrade.MaxPoints" />
+            <label for="maxPoints" class="form-label">Maximal Punkte:</label>
+            <input type="number" class="form-control" id="maxPoints" @bind="newGrade.MaxPoints" />
 
-        <label for="points" class="form-label">Erreichte Punkte:</label>
-        <input type="number" class="form-control" id="points" @bind="newGrade.AchivedPoints" />
+            <label for="points" class="form-label">Erreichte Punkte:</label>
+            <input type="number" class="form-control" id="points" @bind="newGrade.AchivedPoints" />
         
-        <label for="weighting" class="form-label">Gewichtung:</label>
-        <input type="number" class="form-control" id="weighting" @bind="newGrade.Weighting" placeholder="100%" />
+            <label for="weighting" class="form-label">Gewichtung:</label>
+            <input type="number" class="form-control" id="weighting" @bind="newGrade.Weighting" placeholder="100%" />
         
-        <label for="comment" class="form-label">Komentare:</label>
-        <input type="text" class="form-control" id="comment" @bind="newGrade.Comment" />
+            <label for="comment" class="form-label">Komentare:</label>
+            <input type="text" class="form-control" id="comment" @bind="newGrade.Comment" />
 
-        <button class="mt-4 mb-2 p-3 btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
-        @if (!string.IsNullOrWhiteSpace(errorMessage))
-        {
-            <p>@errorMessage</p>
-        }
-
+            <button class="mt-4 mb-2 p-3 btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
+            @if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                <p>@errorMessage</p>
+            }
+        </sectin>
         @*GetAll-----------------------------------------*@
 
         <section>
@@ -75,7 +76,7 @@
     //Create -----------with Grade Calculation-------------------------------
     string? errorMessage;
 
-    GradeModel newGrade = new() { Weighting = 100 };
+    GradeModel newGrade = new() { Weighting = 100, Date = DateTime.Today }; //default for Weighting is 100% and Date is today 
 
 
     private async Task CreateGrade()   
