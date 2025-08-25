@@ -29,12 +29,14 @@
         
             <label for="comment" class="form-label">Komentare:</label>
             <input type="text" class="form-control" id="comment" @bind="newGrade.Comment" />
-
-            <button class="mt-4 mb-2 p-3 btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
+            <br />
             @if (!string.IsNullOrWhiteSpace(errorMessage))
             {
                 <p class="error-message">@errorMessage</p>
             }
+
+            <button class="mt-4 mb-2 p-3 btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
+           
         </sectin>
         @*GetAll-----------------------------------------*@
 
