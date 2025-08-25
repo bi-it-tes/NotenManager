@@ -33,7 +33,7 @@
             <button class="mt-4 mb-2 p-3 btn btn-primary" @onclick="CreateGrade">Note Speichern</button>
             @if (!string.IsNullOrWhiteSpace(errorMessage))
             {
-                <p>@errorMessage</p>
+                <p class="error-message">@errorMessage</p>
             }
         </sectin>
         @*GetAll-----------------------------------------*@
@@ -41,20 +41,24 @@
         <section>
             @foreach (var gradeItem in gradeList)
             {
-                <div class="grade-item p-2 mb-2 border roundet" style="background-color:@GetGradeColor(gradeItem.Grade)">
-                    <p>Note am: @gradeItem.Date.ToShortDateString() <br />
-                        Punkte:
-                    @gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte
-                        (Gewichtung: @gradeItem.Weighting)
+                <div class="grade-item p-2 mb-2 border rounded" style="background-color:@GetGradeColor(gradeItem.Grade)">
+                    <p>
+                        Datum: <span class="grade-value">@gradeItem.Date.ToShortDateString()</span><br />
+                        Punkte: <span class="grade-value">@gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte</span>
+                        (Gewichtung: <span class="grade-value">@gradeItem.Weighting</span>)
                     </p>
                     @*Durchschnitts note von der liste*@
-                    <p>@gradeItem.Grade</p>
+                    <p>
+                        Note: <span class="grade-value">@gradeItem.Grade</span>
+                    </p>
                     <button class="btn btn-outline-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
                 </div>
         }
         </section>
 
-        <p class="mt-4 mb-2 p-3 rounded bg-secondary" style="background-color:@GetGradeColor(totalGrade ?? 0)">Gesamtnote (@totalGrade): </p>
+        <p class="total-grade" style="background-color:@GetGradeColor(totalGrade ?? 0)">
+            Gesamtnote (@totalGrade): 
+        </p>
 
 
     </div>

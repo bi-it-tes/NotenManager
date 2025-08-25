@@ -21,6 +21,23 @@
     margin-top: 0.35rem;
 }
 
+.total-grade {
+    border-top: 0.2rem solid #dee2e6; /*Thin line top*/
+    margin-top: 1rem; /*Space between Grade-List*/
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 0.3rem;
+    border-left: 10px solid blue;
+    
+}
 p {
+    font-variant: small-caps;
+}
 
+.grade-value {
+    font-weight: 500;
+    color: #1a1a1a;
+    font-size: 1rem;
 }
