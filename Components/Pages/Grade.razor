@@ -47,6 +47,14 @@
                         Punkte: <span class="grade-value">@gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte</span>
                         (Gewichtung: <span class="grade-value">@gradeItem.Weighting</span>)
                     </p>
+
+                    @*Wenn Kommentar vorhanden*@
+                    @if (!string.IsNullOrWhiteSpace(gradeItem.Comment))
+                    {
+                        <p>
+                            Kommentar: <span class="grade-value"> @gradeItem.Comment</span>
+                        </p>
+                    }
                     @*Durchschnitts note von der liste*@
                     <p>
                         Note: <span class="grade-value">@gradeItem.Grade</span>
