@@ -1,1 +1,26 @@
-﻿
+﻿.grade-item {
+    background-color: #f8f9fa; /*Hell grau*/
+    border: 0.1rem solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 0.75rem; /*inner distance(space)*/
+    margin-bottom: 0.6rem;  /*Space between items*/
+    box-shadow: 0.1rem 0.1rem 0.5rem rgba(0, 0, 0, 0,1);
+}
+
+.grade-item div {
+    margin-bottom: 0.25rem;   /*space between details*/
+}
+
+.grade-item p {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    font-style: italic;
+}
+
+.grade-item button {
+    margin-top: 0.35rem;
+}
+
+p {
+
+}

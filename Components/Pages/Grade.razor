@@ -41,18 +41,20 @@
         <section>
             @foreach (var gradeItem in gradeList)
             {
-            <p>Note am: @gradeItem.Date.ToShortDateString():
-                Punkte:
-            @gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte
-            (Gewichtung: @gradeItem.Weighting)
-            </p>
-            @*Durchschnitts note von der liste*@
-                <p>@gradeItem.Grade</p>
-                <button class="btn btn-outline-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
+                <div class="grade-item p-2 mb-2 border roundet" style="background-color:@GetGradeColor(gradeItem.Grade)">
+                    <p>Note am: @gradeItem.Date.ToShortDateString() <br />
+                        Punkte:
+                    @gradeItem.AchivedPoints / @gradeItem.MaxPoints Punkte
+                        (Gewichtung: @gradeItem.Weighting)
+                    </p>
+                    @*Durchschnitts note von der liste*@
+                    <p>@gradeItem.Grade</p>
+                    <button class="btn btn-outline-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
+                </div>
         }
         </section>
 
-        <p class="mt-4 mb-2 p-3 rounded bg-secondary">Gesamtnote (@totalGrade): </p>
+        <p class="mt-4 mb-2 p-3 rounded bg-secondary" style="background-color:@GetGradeColor(totalGrade ?? 0)">Gesamtnote (@totalGrade): </p>
 
 
     </div>
@@ -118,11 +120,20 @@
         totalGrade = GradeRepo.CalcTotalGrade(SubjectId);
         newGrade = new(); // Formular leeren
     }
-  
+
     //Delete------------------------------------
     private void DeleteGrade(int Id)
     {
         GradeRepo.Delete(Id);
         gradeList = GradeRepo.GetBySubject(SubjectId).ToList();
+    }
+
+    //Grade status Color
+    private string GetGradeColor(double grade)
+    {
+        if (grade >= 4.6) return "#C8EFA1"; // sehr gut: Grün
+        if (grade >= 4) return "#FCF4C0"; // befriedigt: gelb
+        if (grade <= 3.99) return "#E08484"; // unbefriedig: rot
+        return "8b0000";
     }
 }
