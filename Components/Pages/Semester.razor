@@ -4,6 +4,7 @@
 @rendermode InteractiveServer
 @using NotenManager.Repository
 @using NotenManager.Model
+@inject BreadcrumbRepository BreadcrumbRepo
 
 <PageTitle>Semester</PageTitle>
 
@@ -11,7 +12,9 @@
     <h1 class="pageTitle">
         Welches Semesters:
     </h1>
-     
+
+<Breadcrumb />
+
     <div class="m-3 p-2 border rounded border border-5">
     <div class="container-fluid">
         <section class="createSection">
