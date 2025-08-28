@@ -80,18 +80,6 @@
 
 @code {
     // Getall------------------------------------------
-    protected override void OnInitialized()
-    {
-        BreadcrumbRepo.SetBreadcrumb(new List<BreadcrumbModel>
-        {
-            new BreadcrumbModel("Home", "/"),
-            new BreadcrumbModel("Semester", "/semester"),
-            new BreadcrumbModel("Subject", "/subject"),
-            new BreadcrumbModel("Grade", "/grade"),
-        });
-    }
-
-
     [Parameter]
     public int SubjectId { get; set; }
 

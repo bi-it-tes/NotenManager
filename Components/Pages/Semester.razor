@@ -68,13 +68,32 @@
     protected override void OnInitialized()
     {
         semesterListe =  SemesterRepo.GetAll().ToList();
+
+        BreadcrumbRepo.SetBreadcrumb(new List<BreadcrumbModel>
+        {
+            new BreadcrumbModel("Home", "/"),
+            new BreadcrumbModel("Semester", "/semester")
+        });
+
     }
 
     //Navigation to Subject----------------------------------
     private void NavToSub(int Id)
     {
+        //first breadcrumb then navigate 
+        var BreadcrumbSemester = semesterListe.FirstOrDefault(s => s.Id == Id);
+
+        BreadcrumbRepo.SetBreadcrumb(new List<BreadcrumbModel>
+        {
+            new BreadcrumbModel("Home", "/"),
+            new BreadcrumbModel("Semester", "/semester"),
+            new BreadcrumbModel($"Semester {BreadcrumbSemester.SemesterNumber}", $"/subject/{Id}")
+        });
+        
         Navigation.NavigateTo($"/subject/{Id}");
     }
+
+
 
     // Delete -----------------------------------------
     private void DeleteSemester(int Id)
