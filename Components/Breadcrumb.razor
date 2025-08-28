@@ -6,7 +6,7 @@
 
 @if (BreadcrumbRepo.Breadcrumbs.Any())
 {
-    <nav class="container mt-2 mb-4">
+    <nav class="breadcrumb">
         @for (int i = 0; i < BreadcrumbRepo.Breadcrumbs.Count; i++)
         {
             var item = BreadcrumbRepo.Breadcrumbs[i];

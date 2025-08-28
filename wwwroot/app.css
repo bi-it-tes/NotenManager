@@ -15,6 +15,8 @@ section {
 .itemList {
     margin-top: 1rem;
 }
+/*Header stlying
+ - Bootstrap klase: container-fluid p-5 bg-primary text-white text-center*/
 
 h1.pageTitle {
     /* entspricht container-fluid */
@@ -22,7 +24,7 @@ h1.pageTitle {
     width: 100%;
     /* entspricht p-5 (Bootstrap = 3rem) */
     padding: 3rem;
-    /* entspricht bg-primary */
+    /* entspricht bg-primary =  #0d6efd*/
     background-color: var(--bs-primary);
     /* entspricht text-white */
     color: var(--bs-white);
@@ -30,6 +32,39 @@ h1.pageTitle {
     text-align: center;
     /* extra Abstand nach unten */
     margin-bottom: 1rem;
+}
+/*Breadcrumb styling*/
+
+.breadcrumb {
+    display: fley;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.2rem;
+    min-height: 2rem;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+nav.breadcrumb {
+    background-color: #DBDFDF;
+    font-weight: 500;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    padding-inline: 1rem;
+}
+
+.breadcrumb a {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+        color: #6DA8FD;
+    }
+
+.breadcrumb span:last-child {
+    color: #495057;
 }
 
 .error-message {
@@ -39,4 +74,3 @@ h1.pageTitle {
     margin-bottom: 0.5rem;
     font-size: 1rem;
 }
-/*container-fluid p-5 bg-primary text-white text-center <-- h1 klasse*/
