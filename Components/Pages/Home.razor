@@ -4,10 +4,14 @@
 @using NotenManager.Model
 @using NotenManager.Repository
 @using Microsoft.AspNetCore.Components
+@using NotenManager.Components.Layout
+@inject BreadcrumbRepository BreadcrumbRepo
 
 <PageTitle>Home</PageTitle>
 
-<h1 class="container-fluid p-5 bg-primary text-white text-center">Willkommen zum Noten Manger</h1>
+<h1 class="pageTitle">Willkommen zum Noten Manger</h1>
+
+<Breadcrumb />
 
 <p class="lead"> Diese Webseite sollte dir helfen, deine Semstern und Fächern im Überblick zu behalten und deine Noten einfach zu verwatlten.  </p>
 
@@ -36,9 +40,21 @@
 
 
 @code {
+
+    protected override void OnInitialized()
+    {
+        // Breadcrumbs für die Startseite setzen
+        BreadcrumbRepo.SetBreadcrumb(new List<BreadcrumbModel>
+        {
+            new BreadcrumbModel("Home", "/")
+        });
+    }
+
 //Navigation to Subject----------------------------------
     private void GoToSemesterPage()
     {
         Navigation.NavigateTo($"/semester");
     }
+    // Breadcrumbs------------------------------------------
+  
 }

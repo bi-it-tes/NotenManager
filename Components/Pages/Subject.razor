@@ -1,14 +1,19 @@
 ﻿@page "/subject/{SemesterId:int}"
 @inject SubjectRepository SubjectRepo
+@inject SemesterRepository SemesterRepo
 @inject NavigationManager Navigation
+@inject BreadcrumbRepository BreadcrumbRepo
 @rendermode InteractiveServer
 @using NotenManager.Model
 @using NotenManager.Repository
 @using Microsoft.AspNetCore.Components 
 
+
 <PageTitle>Subject</PageTitle>
 
 <h1 class="pageTitle">Deine Fächer:</h1>
+
+<Breadcrumb />
 
 <div class="m-3 p-3 border rounded border border-5">
 
@@ -42,9 +47,11 @@
 @code {
     // Getall------------------------------------------
     private List<SubjectModel> subjectListe = new();
+
     protected override void OnInitialized()
     {
         subjectListe = SubjectRepo.GetBySemester(SemesterId).ToList();
+
     }
 
     //Create ------------------------------------------
@@ -77,6 +84,17 @@
     // Navigation to Grades ------------------------
     private void NavToGrade(int Id)
     {
+        var BreadcrumbSubject = subjectListe.FirstOrDefault(s => s.Id == Id);
+        var semester = SemesterRepo.GetAll().FirstOrDefault(s => s.Id == BreadcrumbSubject.SemesterId);
+
+        BreadcrumbRepo.SetBreadcrumb(new List<BreadcrumbModel>
+        {
+            new BreadcrumbModel("Home", "/"),
+            new BreadcrumbModel("Semester", "/semester"),
+            new BreadcrumbModel($"Semester {semester.SemesterNumber}", $"/subject/{semester.Id}"),
+            new BreadcrumbModel(BreadcrumbSubject.Name, $"/grade/{Id}")
+        });
+        
         Navigation.NavigateTo($"/grade/{Id}");
     }
 

@@ -1,9 +1,12 @@
 using NotenManager.Components;
 using NotenManager.Repository;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<BreadcrumbRepository>();
+
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 

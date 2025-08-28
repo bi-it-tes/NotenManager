@@ -1,0 +1,26 @@
+﻿@using NotenManager.Components.Layout
+@using NotenManager.Model
+@using NotenManager.Repository
+@inject BreadcrumbRepository BreadcrumbRepo
+
+
+@if (BreadcrumbRepo.Breadcrumbs.Any())
+{
+    <nav class="container mt-2 mb-4">
+        @for (int i = 0; i < BreadcrumbRepo.Breadcrumbs.Count; i++)
+        {
+            var item = BreadcrumbRepo.Breadcrumbs[i];
+            bool isLast = (i == BreadcrumbRepo.Breadcrumbs.Count - 1);  //last one in the list
+
+            @if (isLast) 
+            {
+                <span>@item.Text</span>   //only text
+            }
+            else
+            {
+                <a href="@item.Link">@item.Text</a>
+                <span> / </span>
+            }
+        }
+    </nav>
+}
