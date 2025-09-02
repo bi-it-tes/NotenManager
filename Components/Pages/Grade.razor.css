@@ -41,3 +41,9 @@ p {
     color: #1a1a1a;
     font-size: 1rem;
 }
+
+.note {
+    font-weight: 700;
+    color: #2130a3;
+    font-size: 1rem;
+}

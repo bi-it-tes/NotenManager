@@ -34,10 +34,12 @@
         <section class="itemList">
             @foreach (var subjectItem in subjectListe)
             {
-                <button class="btn btn-outline-secondary" @onclick="() => NavToGrade(subjectItem.Id)">
-                    @subjectItem.Name
-                </button>
-                <button class="btn btn-outline-danger" @onclick="() => DeleteSubject(subjectItem.Id)">Delete</button>
+                <div class="d-flex gap-2 mb-2">
+                    <button class="btn btn-outline-secondary" @onclick="() => NavToGrade(subjectItem.Id)">
+                        @subjectItem.Name
+                    </button>
+                    <button class="btn btn-outline-danger" @onclick="() => DeleteSubject(subjectItem.Id)">Delete</button>
+                </div>
             }
         </section>
     </div>

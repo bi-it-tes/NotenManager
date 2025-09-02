@@ -62,7 +62,7 @@
                     }
                     @*Durchschnitts note von der liste*@
                     <p>
-                        Note: <span class="grade-value">@gradeItem.Grade</span>
+                        Note: <span class="note">@gradeItem.Grade</span>
                     </p>
                     <button class="btn btn-outline-danger" @onclick="() => DeleteGrade(gradeItem.Id)">Delete</button>
                 </div>
@@ -109,7 +109,7 @@
 
         if (newGrade.AchivedPoints < 0)
         {
-            errorMessage = "ErreichtePunkte muss grösser sein als 0.";
+            errorMessage = "ErreichtePunkte darf nicht negativ sein.";
             return;
         }
 
